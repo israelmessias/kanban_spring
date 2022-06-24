@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.criteria.Fetch;
 
-import org.checkerframework.checker.units.qual.C;
+
 
 import lombok.Data;
 
