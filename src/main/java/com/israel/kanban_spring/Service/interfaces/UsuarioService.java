@@ -14,8 +14,6 @@ public interface UsuarioService {
 
     Usuario autenticar(String email, String senha);
 
-    void validarEmail(String email);
-
     Usuario conveter(UsuarioDTO usuarioDTO);
     
     Optional<Usuario> obterPorId(Integer id);
