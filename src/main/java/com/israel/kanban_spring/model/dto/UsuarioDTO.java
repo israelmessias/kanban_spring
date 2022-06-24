@@ -6,6 +6,8 @@ import lombok.Data;
 
 import java.util.Date;
 
+import javax.validation.constraints.Email;
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 public class UsuarioDTO {
   
