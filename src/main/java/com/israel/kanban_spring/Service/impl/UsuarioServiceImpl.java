@@ -47,7 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             Usuario usuarioSave = repository.save(usuario);
             return usuarioSave;
         } catch (Exception e) {
-            throw new UsuarioErro("N�o Conseguio salvar usuario, motivo : "+ e.getMessage());
+            throw new UsuarioErro("Não Conseguio salvar usuario, motivo : "+ e.getMessage());
             //TODO: handle exception
         }
        
@@ -80,7 +80,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Objects.requireNonNull(usuario.getId());
         repository.delete(usuario);
         } catch (Exception e) {
-            throw new UsuarioErro("N�o foi possivel deletar o usuario, motivo: " + e.getMessage());
+            throw new UsuarioErro("Nao foi possivel deletar o usuario, motivo: " + e.getMessage());
             //TODO: handle exception
         }
     }
@@ -89,37 +89,21 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario autenticar(String email, String senha) {
 
         Optional<Usuario> usuario  = repository.findByEmail(email);
-        System.out.println(usuario.get().getEmail());
 
         if(!usuario.isPresent()){
-            System.out.println("Email não correspondem");
+
             throw new UsuarioErro("Usuario não Encontrado");
         }
 
         boolean senhaValidada = passwordEncoder().matches(senha, usuario.get().getSenha());
-        System.out.println(usuario.get().getSenha());
+
 
         if(!senhaValidada){
-            System.out.println("Senhas não correspondem");
+
             throw new UsuarioErro("Senha não correspondem!");
         }
-
-        System.out.println(usuario.get());
         return usuario.get();
     }
-
-    @Override
-    public void validarEmail(String email) {
-        boolean existeEmail = repository.existsByEmail(email);
-
-        if(existeEmail){
-            throw new UsuarioErro("J� existe email cadastrado");
-        }
-        // TODO Auto-generated method stub
-        
-    }
-
-   
 
     @Override
     public Usuario conveter(UsuarioDTO usuarioDTO) {
@@ -130,8 +114,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setSenha(usuarioDTO.getSenha());
         usuario.setData(new Date());
-
-        System.out.println("Nive3l acesso - "+usuarioDTO.getNivelAcesso());
 
         NivelAcesso nivelAcesso = nivelAcessoService.obterPorId(usuarioDTO.getNivelAcesso()).
             orElseThrow( () -> new UsuarioErro("Nivel de Acesso não encontrado para o Id informado.") );
