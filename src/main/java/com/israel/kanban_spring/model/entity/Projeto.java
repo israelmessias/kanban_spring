@@ -1,11 +1,12 @@
 package com.israel.kanban_spring.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+
+@Data
 @Entity
 public class Projeto {
     @SequenceGenerator(name = "Projeto", sequenceName = "projeto_seq", initialValue = 1, allocationSize = 1)
@@ -19,4 +20,12 @@ public class Projeto {
 
     @Column(name = "descricao_projeto")
     private String descricao;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="projeto_tarefa",
+            joinColumns={@JoinColumn(name="id_projeto",
+                    referencedColumnName="id_projeto")},
+            inverseJoinColumns={@JoinColumn(name="id_tarefa",
+                    referencedColumnName="id_tarefa")})
+    Set<Tarefa> tarefas;
 }

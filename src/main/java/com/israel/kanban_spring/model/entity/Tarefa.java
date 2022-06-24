@@ -2,19 +2,8 @@ package com.israel.kanban_spring.model.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.persistence.criteria.Fetch;
-
 
 
 import lombok.Data;
@@ -58,4 +47,12 @@ public class Tarefa {
     @Column(name = "previsao_final")
     @Temporal(TemporalType.TIMESTAMP)
     private Date privesiaoFinal;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="projeto_tarefa",
+            joinColumns={@JoinColumn(name="id_tarefa",
+                    referencedColumnName="id_tarefa")},
+            inverseJoinColumns={@JoinColumn(name="id_projeto",
+                    referencedColumnName="id_projeto")})
+    private Projeto projeto;
 }
