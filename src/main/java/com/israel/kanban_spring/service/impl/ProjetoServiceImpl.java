@@ -41,8 +41,8 @@ public class ProjetoServiceImpl implements ProjetoService {
     public Projeto atualizar(Projeto projeto) {
         try {
             Objects.requireNonNull(projeto.getId());
-            System.out.println(projeto.getId());
-            return repository.save(projeto);
+
+            return repository.saveAndFlush(projeto);
         } catch (Exception e) {
             throw new ProjetoErro("Não foi possivel Atualizar o Projeto.");
         }

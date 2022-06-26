@@ -65,8 +65,8 @@ public class TarefaServiceImpl implements TarefaService {
             Integer id = tarefaSaved.getProjeto().getId();
             System.out.println(id);
             Optional<Projeto> projeto = projetoService.obterPorId(id);
-            Set<Tarefa>tarefas = new HashSet<Tarefa>();
-            tarefas.add(tarefaSaved);
+            tarefaSaved.setProjeto(null);
+            Set<Tarefa>tarefas = Set.of(tarefaSaved);
             projeto.get().setTarefas(tarefas);
 
             projetoService.atualizar(projeto.get());

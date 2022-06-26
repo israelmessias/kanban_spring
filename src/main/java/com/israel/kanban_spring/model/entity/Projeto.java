@@ -3,6 +3,7 @@ package com.israel.kanban_spring.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,10 +24,10 @@ public class Projeto {
 
     @OneToMany(cascade={
             CascadeType.PERSIST,
-            CascadeType.MERGE})
+            CascadeType.MERGE}, targetEntity = Tarefa.class)
     @JoinTable(name="projeto_tarefa",
             joinColumns=@JoinColumn(name="id_projeto"),
             inverseJoinColumns =@JoinColumn(name = "id_tarefa")
             )
-    Set<Tarefa> tarefas;
+    Set<Tarefa> tarefas = new HashSet<>();
 }

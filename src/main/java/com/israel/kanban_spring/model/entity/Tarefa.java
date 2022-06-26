@@ -51,7 +51,7 @@ public class Tarefa {
     @OneToOne(cascade={
             CascadeType.PERSIST,
             CascadeType.MERGE
-    })
+    }, targetEntity = Projeto.class)
     @JoinTable(name="projeto_tarefa",
             joinColumns= @JoinColumn(name="id_tarefa"),
             inverseJoinColumns=@JoinColumn(name="id_projeto"))
