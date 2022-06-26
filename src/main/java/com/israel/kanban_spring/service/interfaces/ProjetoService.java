@@ -1,4 +1,4 @@
-package com.israel.kanban_spring.Service.interfaces;
+package com.israel.kanban_spring.service.interfaces;
 
 import com.israel.kanban_spring.model.dto.ProjetoDTO;
 import com.israel.kanban_spring.model.entity.Projeto;

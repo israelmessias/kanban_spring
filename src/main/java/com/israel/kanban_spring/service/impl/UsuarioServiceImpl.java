@@ -1,4 +1,4 @@
-package com.israel.kanban_spring.Service.impl;
+package com.israel.kanban_spring.service.impl;
 
 import java.util.Date;
 import java.util.Objects;
@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.israel.kanban_spring.model.dto.NivelAcessoDTO;
 import com.israel.kanban_spring.model.dto.UsuarioUpdateDTO;
 import com.israel.kanban_spring.model.enums.NivelAcessoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.israel.kanban_spring.Err.UsuarioErro;
-import com.israel.kanban_spring.Service.interfaces.UsuarioService;
+import com.israel.kanban_spring.error.UsuarioErro;
+import com.israel.kanban_spring.service.interfaces.UsuarioService;
 import com.israel.kanban_spring.model.dto.UsuarioDTO;
 import com.israel.kanban_spring.model.entity.NivelAcesso;
 import com.israel.kanban_spring.model.entity.Usuario;

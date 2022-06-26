@@ -21,11 +21,12 @@ public class Projeto {
     @Column(name = "descricao_projeto")
     private String descricao;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade={
+            CascadeType.PERSIST,
+            CascadeType.MERGE})
     @JoinTable(name="projeto_tarefa",
-            joinColumns={@JoinColumn(name="id_projeto",
-                    referencedColumnName="id_projeto")},
-            inverseJoinColumns={@JoinColumn(name="id_tarefa",
-                    referencedColumnName="id_tarefa")})
+            joinColumns=@JoinColumn(name="id_projeto"),
+            inverseJoinColumns =@JoinColumn(name = "id_tarefa")
+            )
     Set<Tarefa> tarefas;
 }

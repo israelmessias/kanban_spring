@@ -1,8 +1,7 @@
-package com.israel.kanban_spring.Service.interfaces;
+package com.israel.kanban_spring.service.interfaces;
 
 import java.util.Optional;
 
-import com.israel.kanban_spring.model.dto.NivelAcessoDTO;
 import com.israel.kanban_spring.model.dto.UsuarioDTO;
 import com.israel.kanban_spring.model.dto.UsuarioUpdateDTO;
 import com.israel.kanban_spring.model.entity.Usuario;

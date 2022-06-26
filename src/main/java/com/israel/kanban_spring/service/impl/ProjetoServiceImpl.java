@@ -1,7 +1,7 @@
-package com.israel.kanban_spring.Service.impl;
+package com.israel.kanban_spring.service.impl;
 
-import com.israel.kanban_spring.Err.ProjetoErro;
-import com.israel.kanban_spring.Service.interfaces.ProjetoService;
+import com.israel.kanban_spring.error.ProjetoErro;
+import com.israel.kanban_spring.service.interfaces.ProjetoService;
 import com.israel.kanban_spring.model.dto.ProjetoDTO;
 import com.israel.kanban_spring.model.entity.Projeto;
 import com.israel.kanban_spring.model.entity.Tarefa;

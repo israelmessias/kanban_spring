@@ -48,11 +48,12 @@ public class Tarefa {
     @Temporal(TemporalType.TIMESTAMP)
     private Date privesiaoFinal;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade={
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(name="projeto_tarefa",
-            joinColumns={@JoinColumn(name="id_tarefa",
-                    referencedColumnName="id_tarefa")},
-            inverseJoinColumns={@JoinColumn(name="id_projeto",
-                    referencedColumnName="id_projeto")})
+            joinColumns= @JoinColumn(name="id_tarefa"),
+            inverseJoinColumns=@JoinColumn(name="id_projeto"))
     private Projeto projeto;
 }

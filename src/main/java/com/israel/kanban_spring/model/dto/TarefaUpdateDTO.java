@@ -6,18 +6,14 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class TarefaDTO {
+public class TarefaUpdateDTO {
     private Integer id;
 
     private String titulo;
 
     private Integer usuario;
 
-    private StatusEnum status;
-
     private String descricao;
-
-    private Date createDate;
 
     private Date updateDate;
 

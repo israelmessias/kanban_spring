@@ -1,6 +1,6 @@
 package com.israel.kanban_spring.controller;
 
-import com.israel.kanban_spring.Service.impl.ProjetoServiceImpl;
+import com.israel.kanban_spring.service.impl.ProjetoServiceImpl;
 import com.israel.kanban_spring.model.dto.ProjetoDTO;
 import com.israel.kanban_spring.model.entity.Projeto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +27,10 @@ public class ProjetoController {
 
         try {
             Projeto projeto = service.converter(projetoDTO);
-            System.out.println(projeto.getDescricao());
             service.salvar(projeto);
             return new ResponseEntity(projeto, HttpStatus.CREATED);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
 
     }

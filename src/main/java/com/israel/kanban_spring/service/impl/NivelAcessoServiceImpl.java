@@ -1,4 +1,4 @@
-package com.israel.kanban_spring.Service.impl;
+package com.israel.kanban_spring.service.impl;
 
 import java.util.Optional;
 
@@ -6,7 +6,7 @@ import com.israel.kanban_spring.model.enums.NivelAcessoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.israel.kanban_spring.Service.interfaces.NivelAcessoService;
+import com.israel.kanban_spring.service.interfaces.NivelAcessoService;
 import com.israel.kanban_spring.model.entity.NivelAcesso;
 import com.israel.kanban_spring.model.repository.NivelAcessoRepository;
 

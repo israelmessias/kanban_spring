@@ -2,7 +2,6 @@ package com.israel.kanban_spring.controller;
 
 import com.israel.kanban_spring.model.dto.NivelAcessoDTO;
 import com.israel.kanban_spring.model.dto.UsuarioUpdateDTO;
-import com.israel.kanban_spring.model.entity.NivelAcesso;
 import com.israel.kanban_spring.model.enums.NivelAcessoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.israel.kanban_spring.Service.impl.UsuarioServiceImpl;
+import com.israel.kanban_spring.service.impl.UsuarioServiceImpl;
 import com.israel.kanban_spring.model.dto.UsuarioDTO;
 import com.israel.kanban_spring.model.entity.Usuario;
 
