@@ -2,6 +2,7 @@ package com.israel.kanban_spring.Service.impl;
 
 import java.util.Optional;
 
+import com.israel.kanban_spring.model.enums.NivelAcessoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,10 @@ public class NivelAcessoServiceImpl implements NivelAcessoService {
         // TODO Auto-generated method stub
         return repository.findById(id);
     }
-    
+
+    @Override
+    public Optional<NivelAcesso> obterPorSigla(NivelAcessoEnum sigla) {
+        return repository.findByNivelAcessoEnum(sigla);
+    }
+
 }

@@ -1,5 +1,9 @@
 package com.israel.kanban_spring.controller;
 
+import com.israel.kanban_spring.model.dto.NivelAcessoDTO;
+import com.israel.kanban_spring.model.dto.UsuarioUpdateDTO;
+import com.israel.kanban_spring.model.entity.NivelAcesso;
+import com.israel.kanban_spring.model.enums.NivelAcessoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import com.israel.kanban_spring.Service.impl.UsuarioServiceImpl;
 import com.israel.kanban_spring.model.dto.UsuarioDTO;
 import com.israel.kanban_spring.model.entity.Usuario;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuario")
@@ -35,13 +41,14 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping(path = "{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Integer id, @RequestBody UsuarioDTO usuarioDTO) {
+    @PutMapping(path = "/atualizar/{id}")
+    public ResponseEntity atualizar(@PathVariable("id") Integer id, @RequestBody UsuarioUpdateDTO usuarioDTO) {
     	return (ResponseEntity) service.obterPorId(id).map(entity ->
         {
             try {
-                Usuario usuario = service.conveter(usuarioDTO);
+                Usuario usuario = service.conveterUpdate(usuarioDTO);
                 usuario.setId(entity.getId());
+                usuario.setNivelAcesso(entity.getNivelAcesso());
                 service.atualizar(usuario);
                 return new ResponseEntity(usuario, HttpStatus.CREATED);
             } catch (Exception e) {
@@ -62,6 +69,26 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body("menssagem: "+e.getMessage());
         }
 
+    }
+
+    @PutMapping("/atualizar/acesso")
+    public ResponseEntity atualizarNiveldeAcesso( @RequestBody NivelAcessoDTO nivelAcesso){
+        return (ResponseEntity) service.obterPorId(nivelAcesso.getScrumMaster()).map(entity ->{
+            try {
+                Optional<Usuario> scrum = service.obterPorId(entity.getId());
+
+                if (scrum.get().getNivelAcesso().getNivelAcessoEnum().equals(NivelAcessoEnum.SM)) {
+                    Usuario  nUsuario = service.atualizarNivelAcesso(scrum.get(),
+                            nivelAcesso.getUsuario(), nivelAcesso.getNivelAcessoEnum());
+                    return new  ResponseEntity(nUsuario, HttpStatus.CREATED);
+                } else {
+                    return new ResponseEntity("Somente Scrum Master pode fazer essa requisição",
+                            HttpStatus.BAD_REQUEST);
+                }
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+        }).orElseGet( () -> new ResponseEntity("Id não encontrado.", HttpStatus.BAD_REQUEST));
     }
 
     @DeleteMapping("{id}")

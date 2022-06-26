@@ -6,6 +6,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.israel.kanban_spring.model.dto.NivelAcessoDTO;
+import com.israel.kanban_spring.model.dto.UsuarioUpdateDTO;
+import com.israel.kanban_spring.model.enums.NivelAcessoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -115,7 +118,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setSenha(usuarioDTO.getSenha());
         usuario.setData(new Date());
 
-        NivelAcesso nivelAcesso = nivelAcessoService.obterPorId(usuarioDTO.getNivelAcesso()).
+        NivelAcesso nivelAcesso = nivelAcessoService.obterPorSigla(usuarioDTO.getNivelAcesso()).
             orElseThrow( () -> new UsuarioErro("Nivel de Acesso não encontrado para o Id informado.") );
 
         usuario.setNivelAcesso(nivelAcesso);
@@ -123,10 +126,36 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
-	@Override
+    @Override
+    public Usuario conveterUpdate(UsuarioUpdateDTO usuarioDTO) {
+
+        Usuario usuario = new Usuario();
+        usuario.setId(usuarioDTO.getId());
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setSenha(usuarioDTO.getSenha());
+        usuario.setData(new Date());
+
+        return usuario;
+    }
+
+    @Override
 	public Optional<Usuario> obterPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return repository.findById(id);
 	}
-    
+
+    @Override
+    @Transactional
+    public Usuario atualizarNivelAcesso(Usuario scrumMaster, Integer usuario, NivelAcessoEnum enums) {
+        Optional<Usuario> users = repository.findById(usuario);
+        Optional<NivelAcesso> nivelAcesso = nivelAcessoService.obterPorSigla(enums);
+
+        if(scrumMaster.getNivelAcesso().getNivelAcessoEnum().equals(NivelAcessoEnum.SM)){
+            users.get().setNivelAcesso(nivelAcesso.get());
+        }
+        return atualizar(users.get());
+    }
+
+
 }

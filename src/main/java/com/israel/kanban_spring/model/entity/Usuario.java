@@ -25,7 +25,7 @@ public class Usuario {
     @Column(name="id", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_nivel_acesso")
     private NivelAcesso nivelAcesso;
 
