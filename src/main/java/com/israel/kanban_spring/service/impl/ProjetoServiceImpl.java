@@ -60,8 +60,8 @@ public class ProjetoServiceImpl implements ProjetoService {
         projeto.setDescricao(dto.getDescricao());
         projeto.setTitulo(dto.getTitulo());
 
-        Set<Tarefa> tarefas = serviceTarefa.obterTarefas(dto.getTarefas());
-        projeto.setTarefas(tarefas);
+//        Set<Tarefa> tarefas = serviceTarefa.obterTarefas(dto.getTarefas());
+        projeto.setTarefas(null);
 
         return projeto;
     }
