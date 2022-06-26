@@ -1,6 +1,7 @@
 package com.israel.kanban_spring.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.israel.kanban_spring.model.enums.NivelAcessoEnum;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ public class UsuarioDTO {
 
     private String email;
 
-    private Integer nivelAcesso;
+    private NivelAcessoEnum nivelAcesso;
 
     private String senha;
 
