@@ -1,13 +1,9 @@
 package com.israel.kanban_spring.model.entity;
 
 import javax.annotation.Generated;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.israel.kanban_spring.model.enums.NivelAcessoEnum;
 import lombok.Data;
 
 @Data
@@ -23,4 +19,8 @@ public class NivelAcesso {
     
     @Column(name="descricao")
     private String descricao;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "sigla")
+    private NivelAcessoEnum nivelAcessoEnum;
 }
