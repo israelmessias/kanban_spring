@@ -60,17 +60,8 @@ public class TarefaServiceImpl implements TarefaService {
     public Tarefa criar(Tarefa tarefa) {
         try {
             Tarefa tarefaSaved = repository.saveAndFlush(tarefa);
-
-
-            Integer id = tarefaSaved.getProjeto().getId();
-            System.out.println(id);
-            Optional<Projeto> projeto = projetoService.obterPorId(id);
-            tarefaSaved.setProjeto(null);
-            Set<Tarefa>tarefas = Set.of(tarefaSaved);
-            projeto.get().setTarefas(tarefas);
-
-            projetoService.atualizar(projeto.get());
             return tarefaSaved;
+            
         } catch (Exception e) {
             throw new TarefaErro("Não foi possivel criar a tarefa.\n motivo: "+e.getMessage());
         }

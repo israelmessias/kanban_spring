@@ -1,11 +1,13 @@
 package com.israel.kanban_spring.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
 
 @Data
 @Entity
@@ -22,6 +24,8 @@ public class Projeto {
     @Column(name = "descricao_projeto")
     private String descricao;
 
+    @JsonBackReference
+    
     @OneToMany(cascade={
             CascadeType.PERSIST,
             CascadeType.MERGE}, targetEntity = Tarefa.class)

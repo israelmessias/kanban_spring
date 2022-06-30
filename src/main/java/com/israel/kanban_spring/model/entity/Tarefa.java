@@ -1,12 +1,10 @@
 package com.israel.kanban_spring.model.entity;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 
 import javax.persistence.*;
-import javax.persistence.criteria.Fetch;
-
-
-import lombok.Data;
+import java.util.Date;
 
 @Data
 @Table(name = "tarefa")
@@ -48,9 +46,11 @@ public class Tarefa {
     @Temporal(TemporalType.TIMESTAMP)
     private Date privesiaoFinal;
 
+    @JsonManagedReference
     @OneToOne(cascade={
             CascadeType.PERSIST,
-            CascadeType.MERGE
+            CascadeType.MERGE,
+            CascadeType.REFRESH
     }, targetEntity = Projeto.class)
     @JoinTable(name="projeto_tarefa",
             joinColumns= @JoinColumn(name="id_tarefa"),

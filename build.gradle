@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation group: 'org.springframework.security', name: 'spring-security-crypto'
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
 	implementation 'org.hibernate:hibernate-validator:7.0.0.CR1'
 
 	compileOnly 'org.projectlombok:lombok'

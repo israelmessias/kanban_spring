@@ -29,7 +29,7 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity salvaUsuario(@Validated @RequestBody UsuarioDTO usuarioDTO){
         Usuario usuario = service.conveter(usuarioDTO);
-        
+        System.out.println(usuario.getNome());
         try {
             Usuario usuarioSalvo = service.salvar(usuario);
             return new ResponseEntity(usuarioSalvo, HttpStatus.CREATED);
