@@ -38,15 +38,15 @@ public class TarefaServiceImpl implements TarefaService {
     }
 
     @Override
-    public Set<Tarefa> obterTarefas(Set<Integer> ids) {
+    public Set<Tarefa> obterTarefas(Integer id) {
 
         List<Tarefa> tarefas = null;
-        ids = new HashSet<>();
+        
         try {
-            if(ids.isEmpty()){
+            if(id == null){
               tarefas = repository.findAll();
             }else{
-                tarefas = repository.findAllById(ids);
+                tarefas = repository.findByIdTarefa(id);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

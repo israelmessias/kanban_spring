@@ -8,7 +8,7 @@ import com.israel.kanban_spring.model.enums.StatusEnum;
 import java.util.Set;
 
 public interface TarefaService {
-    Set<Tarefa> obterTarefas(Set<Integer> ids);
+    Set<Tarefa> obterTarefas(Integer id);
 
     Tarefa criar(Tarefa tarefa);
 
